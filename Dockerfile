@@ -7,10 +7,10 @@ ENV PYSPARK_PYTHON=python3.4
 ENV PYSPARK_DRIVER_PYTHON=python3.4
 
 # Set up Jupyter
-RUN mkdir /home/hadoop/notebooks && \
+RUN mkdir /home/jovyan/geopyspark && \
     pip3 install --user pytest && \
     jupyter nbextension enable --py widgetsnbextension
-COPY kernels/local/kernel.json /home/hadoop/.local/share/jupyter/kernels/pyspark/kernel.json
+COPY kernels/local/kernel.json /home/jovyan/.local/share/jupyter/kernels/pyspark/kernel.json
 
 # Install GeoPySpark
 RUN pip3 install --user protobuf==3.3.0 traitlets==4.3.2 "https://github.com/locationtech-labs/geopyspark/archive/$GEOPYSPARKSHA.zip"
@@ -20,8 +20,8 @@ ADD https://s3.amazonaws.com/geopyspark-dependency-jars/geotrellis-backend-assem
 
 USER root
 RUN chmod ugo+r /opt/jars/*
-RUN chown -R hadoop:hadoop /home/hadoop/.local/share
-USER hadoop
+RUN chown -R jovyan:jovyan /home/jovyan/.local/share
+USER jovyan
 
 WORKDIR /tmp
-CMD ["jupyterhub", "--no-ssl", "--Spawner.notebook_dir=/home/hadoop/notebooks"]
+CMD ["jupyterhub", "--no-ssl", "--Spawner.notebook_dir=/home/jovyan/geopyspark"]
