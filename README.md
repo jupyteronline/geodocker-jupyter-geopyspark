@@ -1,3 +1,6 @@
+.. image:: https://binder.jupyteronline.com/badge_logo.svg
+ :target: https://binder.jupyteronline.com/v2/gh/binder-examples/conda.git/master?filepath=index.ipynb
+
 # Introduction #
 
 This repository contains the configuration and build files necessary to produce the [`quay.io/geodocker/jupyter-geopyspark` Docker image](https://quay.io/repository/geodocker/jupyter-geopyspark?tab=tags).
